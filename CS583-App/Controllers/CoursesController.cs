@@ -22,7 +22,7 @@ namespace CS583_App.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Course.Include(c => c.Teacher);
+            var applicationDbContext = _context.Course.Include(c => c.Subject).Include(c => c.Teacher);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace CS583_App.Controllers
             }
 
             var course = await _context.Course
+                .Include(c => c.Subject)
                 .Include(c => c.Teacher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (course == null)
@@ -48,6 +49,7 @@ namespace CS583_App.Controllers
         // GET: Courses/Create
         public IActionResult Create()
         {
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
             ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
@@ -57,7 +59,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId,SubjectId")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +67,7 @@ namespace CS583_App.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
             ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", course.TeacherId);
             return View(course);
         }
@@ -82,6 +85,7 @@ namespace CS583_App.Controllers
             {
                 return NotFound();
             }
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
             ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", course.TeacherId);
             return View(course);
         }
@@ -91,7 +95,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId,SubjectId")] Course course)
         {
             if (id != course.Id)
             {
@@ -118,6 +122,7 @@ namespace CS583_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
             ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", course.TeacherId);
             return View(course);
         }
@@ -131,6 +136,7 @@ namespace CS583_App.Controllers
             }
 
             var course = await _context.Course
+                .Include(c => c.Subject)
                 .Include(c => c.Teacher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (course == null)

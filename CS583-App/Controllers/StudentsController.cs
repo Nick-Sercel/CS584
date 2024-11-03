@@ -22,7 +22,8 @@ namespace CS583_App.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Student.ToListAsync());
+            var applicationDbContext = _context.Student.Include(s => s.Major);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Students/Details/5
@@ -34,6 +35,7 @@ namespace CS583_App.Controllers
             }
 
             var student = await _context.Student
+                .Include(s => s.Major)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {
@@ -46,6 +48,7 @@ namespace CS583_App.Controllers
         // GET: Students/Create
         public IActionResult Create()
         {
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,SubjectId")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace CS583_App.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", student.SubjectId);
             return View(student);
         }
 
@@ -78,6 +82,7 @@ namespace CS583_App.Controllers
             {
                 return NotFound();
             }
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", student.SubjectId);
             return View(student);
         }
 
@@ -86,7 +91,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,SubjectId")] Student student)
         {
             if (id != student.Id)
             {
@@ -113,6 +118,7 @@ namespace CS583_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", student.SubjectId);
             return View(student);
         }
 
@@ -125,6 +131,7 @@ namespace CS583_App.Controllers
             }
 
             var student = await _context.Student
+                .Include(s => s.Major)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {
