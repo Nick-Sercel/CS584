@@ -59,10 +59,6 @@
       "RelativeMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|solutionrelative:cs583-app\\views\\courses\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241209234221_UpdateModalsWithValidateNever.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CS583-App\\Data\\Migrations\\20241209234221_UpdateModalsWithValidateNever.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|d:\\visualstudioprojects\\cs583-app\\cs583-app\\models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|solutionrelative:cs583-app\\models\\subject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -77,10 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|d:\\visualstudioprojects\\cs583-app\\cs583-app\\views\\students\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|solutionrelative:cs583-app\\views\\students\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241209181957_UpdateTeacherModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CS583-App\\Data\\Migrations\\20241209181957_UpdateTeacherModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|d:\\visualstudioprojects\\cs583-app\\cs583-app\\views\\subjects\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -121,6 +113,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|d:\\visualstudioprojects\\cs583-app\\cs583-app\\data\\migrations\\20241103062217_addsubjecttoall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|solutionrelative:cs583-app\\data\\migrations\\20241103062217_addsubjecttoall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|d:\\visualstudioprojects\\cs583-app\\cs583-app\\data\\migrations\\20241209234221_updatemodalswithvalidatenever.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|solutionrelative:cs583-app\\data\\migrations\\20241209234221_updatemodalswithvalidatenever.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|d:\\visualstudioprojects\\cs583-app\\cs583-app\\data\\migrations\\20241209181957_updateteachermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{804231D5-2815-4FA5-94A7-2A2E8DD7229B}|CS583-App\\CS583-App.csproj|solutionrelative:cs583-app\\data\\migrations\\20241209181957_updateteachermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -155,8 +155,7 @@
               "RelativeToolTip": "CS583-App\\Views\\Courses\\Edit.cshtml",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAACwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-10T00:54:07.073Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T00:54:07.073Z"
             },
             {
               "$type": "Document",
@@ -168,8 +167,7 @@
               "RelativeToolTip": "CS583-App\\Views\\Courses\\Details.cshtml",
               "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-10T00:38:02.15Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T00:38:02.15Z"
             },
             {
               "$type": "Document",
@@ -181,12 +179,11 @@
               "RelativeToolTip": "CS583-App\\Views\\Courses\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-10T00:17:50.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T00:17:50.616Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 28,
               "Title": "20241209234221_UpdateModalsWithValidateNever.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241209234221_UpdateModalsWithValidateNever.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241209234221_UpdateModalsWithValidateNever.cs",
@@ -194,8 +191,7 @@
               "RelativeToolTip": "CS583-App\\Data\\Migrations\\20241209234221_UpdateModalsWithValidateNever.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T23:42:21.204Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T23:42:21.204Z"
             },
             {
               "$type": "Document",
@@ -207,8 +203,7 @@
               "RelativeToolTip": "CS583-App\\Controllers\\TeachersController.cs",
               "ViewState": "AgIAAJMAAAAAAAAAAAAiwKsAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T06:20:32.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:20:32.088Z"
             },
             {
               "$type": "Document",
@@ -220,8 +215,7 @@
               "RelativeToolTip": "CS583-App\\Controllers\\CoursesController.cs",
               "ViewState": "AgIAAGUAAAAAAAAAAAAmwIIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T06:21:45.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:21:45.428Z"
             },
             {
               "$type": "Document",
@@ -233,12 +227,11 @@
               "RelativeToolTip": "CS583-App\\Views\\Subjects\\Delete.cshtml",
               "ViewState": "AgIAABgAAAAAAAAAAAAAACwAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-09T18:41:27.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T18:41:27.085Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "Subject.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Models\\Subject.cs",
               "RelativeDocumentMoniker": "CS583-App\\Models\\Subject.cs",
@@ -246,8 +239,7 @@
               "RelativeToolTip": "CS583-App\\Models\\Subject.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T05:53:21.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T05:53:21.498Z"
             },
             {
               "$type": "Document",
@@ -259,12 +251,11 @@
               "RelativeToolTip": "CS583-App\\Models\\Course.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T05:44:38.95Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T05:44:38.95Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "StudentsController.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Controllers\\StudentsController.cs",
               "RelativeDocumentMoniker": "CS583-App\\Controllers\\StudentsController.cs",
@@ -272,8 +263,7 @@
               "RelativeToolTip": "CS583-App\\Controllers\\StudentsController.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAowDIAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T06:21:03.342Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:21:03.342Z"
             },
             {
               "$type": "Document",
@@ -285,12 +275,11 @@
               "RelativeToolTip": "CS583-App\\Views\\Courses\\Create.cshtml",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-08T22:30:05.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T22:30:05.859Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Views\\Students\\Create.cshtml",
               "RelativeDocumentMoniker": "CS583-App\\Views\\Students\\Create.cshtml",
@@ -298,12 +287,11 @@
               "RelativeToolTip": "CS583-App\\Views\\Students\\Create.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-03T06:23:53.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:23:53.239Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 29,
               "Title": "20241209181957_UpdateTeacherModel.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241209181957_UpdateTeacherModel.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241209181957_UpdateTeacherModel.cs",
@@ -311,12 +299,11 @@
               "RelativeToolTip": "CS583-App\\Data\\Migrations\\20241209181957_UpdateTeacherModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T18:19:57.694Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T18:19:57.694Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "Student.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Models\\Student.cs",
               "RelativeDocumentMoniker": "CS583-App\\Models\\Student.cs",
@@ -324,12 +311,11 @@
               "RelativeToolTip": "CS583-App\\Models\\Student.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T05:50:37.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T05:50:37.723Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 27,
               "Title": "20241103062217_AddSubjectToAll.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241103062217_AddSubjectToAll.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241103062217_AddSubjectToAll.cs",
@@ -337,12 +323,11 @@
               "RelativeToolTip": "CS583-App\\Data\\Migrations\\20241103062217_AddSubjectToAll.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T06:22:18.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:22:18.039Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 19,
               "Title": "ApplicationDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\ApplicationDbContextModelSnapshot.cs",
@@ -350,12 +335,11 @@
               "RelativeToolTip": "CS583-App\\Data\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T06:22:59.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:22:59.714Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 21,
               "Title": "20241103060033_TryingFromScratchAgain.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241103060033_TryingFromScratchAgain.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241103060033_TryingFromScratchAgain.cs",
@@ -363,12 +347,11 @@
               "RelativeToolTip": "CS583-App\\Data\\Migrations\\20241103060033_TryingFromScratchAgain.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T06:00:34.044Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:00:34.044Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 22,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "CS583-App\\Models\\ErrorViewModel.cs",
@@ -376,12 +359,11 @@
               "RelativeToolTip": "CS583-App\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T05:53:43.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T05:53:43.498Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 25,
               "Title": "20241103054755_UpdateToNoAction.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241103054755_UpdateToNoAction.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241103054755_UpdateToNoAction.cs",
@@ -392,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 20,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\ApplicationDbContext.cs",
@@ -400,12 +382,11 @@
               "RelativeToolTip": "CS583-App\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAUwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T05:45:20.889Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T05:45:20.889Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 24,
               "Title": "20241103055230_AnotherAttempt.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241103055230_AnotherAttempt.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241103055230_AnotherAttempt.cs",
@@ -416,7 +397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 23,
               "Title": "20241103055656_DroppingSubjectTable.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241103055656_DroppingSubjectTable.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241103055656_DroppingSubjectTable.cs",
@@ -427,7 +408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 26,
               "Title": "20241103054451_TestUpdate.cs",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Data\\Migrations\\20241103054451_TestUpdate.cs",
               "RelativeDocumentMoniker": "CS583-App\\Data\\Migrations\\20241103054451_TestUpdate.cs",
@@ -456,8 +437,7 @@
               "RelativeToolTip": "CS583-App\\Views\\Teachers\\Delete.cshtml",
               "ViewState": "AgIAACoAAAAAAAAAAAA0wDgAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-10T03:42:19.447Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T03:42:19.447Z"
             },
             {
               "$type": "Document",
@@ -469,8 +449,7 @@
               "RelativeToolTip": "CS583-App\\Views\\Teachers\\Create.cshtml",
               "ViewState": "AgIAABMAAAAAAAAAAAA0wCQAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-08T22:30:20.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T22:30:20.498Z"
             },
             {
               "$type": "Document",
@@ -482,8 +461,7 @@
               "RelativeToolTip": "CS583-App\\Models\\Teacher.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T05:50:48.551Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T05:50:48.551Z"
             },
             {
               "$type": "Document",
@@ -495,8 +473,7 @@
               "RelativeToolTip": "CS583-App\\Views\\Subjects\\Create.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-03T06:28:13.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:28:13.231Z"
             },
             {
               "$type": "Document",
@@ -513,7 +490,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\VisualStudioProjects\\CS583-App\\CS583-App\\Views\\Subjects\\Index.cshtml",
               "RelativeDocumentMoniker": "CS583-App\\Views\\Subjects\\Index.cshtml",
@@ -521,8 +498,7 @@
               "RelativeToolTip": "CS583-App\\Views\\Subjects\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-03T06:30:53.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T06:30:53.914Z"
             }
           ]
         }
