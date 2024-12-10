@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CS583-App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+027658c3d2fcc5a999d8176b5d251e34cf02d6e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5302e2d69d312ff946c54999c7a0edf6bf231018")]
 [assembly: System.Reflection.AssemblyProductAttribute("CS583-App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CS583-App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

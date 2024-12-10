@@ -34,6 +34,16 @@
                 <span asp-validation-for="SubjectId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label>Students</label>
+                @foreach (var student in ViewBag.Students)
+                {
+                    <div>
+                        <input type="checkbox" name="SelectedStudents" value="@student.Id" />
+                        <label>@student.Name</label>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

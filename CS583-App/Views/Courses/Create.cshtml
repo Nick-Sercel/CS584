@@ -23,13 +23,25 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TeacherId" class="control-label"></label>
+                <label asp-for="TeacherId" class="control-label">Teacher</label>
                 <select asp-for="TeacherId" class ="form-control" asp-items="ViewBag.TeacherId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="SubjectId" class="control-label"></label>
-                <select asp-for="SubjectId" class ="form-control" asp-items="ViewBag.SubjectId"></select>
+                <label asp-for="SubjectId" class="control-label">Subject</label>
+                <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId"></select>
             </div>
+
+            <div class="form-group">
+                <label>Students</label>
+                @foreach (var student in ViewBag.Students)
+                {
+                    <div>
+                        <input type="checkbox" name="SelectedStudents" value="@student.Id" />
+                        <label>@student.Name</label>
+                    </div>
+                }
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

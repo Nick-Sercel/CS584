@@ -7,7 +7,7 @@ namespace CS583_App.Models
         [Key]
         [Required]
         public required int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Name is required.")]
         public required string Name { get; set; }
         public Subject() { }
     }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS583_App.Data;
 using CS583_App.Models;
+using NuGet.DependencyResolver;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CS583_App.Controllers
 {
@@ -50,7 +52,8 @@ namespace CS583_App.Controllers
         public IActionResult Create()
         {
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
-            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id");
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name");
+            ViewBag.Students = _context.Student.Select(c => new { c.Id, c.Name }).ToList();
             return View();
         }
 
@@ -59,10 +62,22 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId,SubjectId")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, int[] SelectedStudents)
         {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                System.Console.WriteLine(error.ErrorMessage);
+            }
             if (ModelState.IsValid)
             {
+                foreach (var studentId in SelectedStudents)
+                {
+                    var student = await _context.Student.FindAsync(studentId);
+                    if (student != null)
+                    {
+                        course.Students.Add(student);
+                    }
+                }
                 _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +101,8 @@ namespace CS583_App.Controllers
                 return NotFound();
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
-            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", course.TeacherId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name", course.TeacherId);
+            ViewBag.Students = _context.Student.Select(c => new { c.Id, c.Name }).ToList();
             return View(course);
         }
 
@@ -95,7 +111,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId,SubjectId")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, int[] SelectedStudents)
         {
             if (id != course.Id)
             {
@@ -107,6 +123,26 @@ namespace CS583_App.Controllers
                 try
                 {
                     _context.Update(course);
+                    var existingCourse = await _context.Course
+                        .Include(c => c.Students) // Ensure Students are loaded
+                        .FirstOrDefaultAsync(c => c.Id == id);
+
+                    if (existingCourse != null)
+                    {
+                        // Clear existing relationships
+                        existingCourse.Students.Clear();
+
+                        // Add the selected students to the course
+                        foreach (var studentId in SelectedStudents)
+                        {
+                            System.Console.WriteLine(studentId);
+                            var student = await _context.Student.FindAsync(studentId);
+                            if (student != null)
+                            {
+                                existingCourse.Students.Add(student);
+                            }
+                        }
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

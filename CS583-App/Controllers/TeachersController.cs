@@ -49,6 +49,7 @@ namespace CS583_App.Controllers
         public IActionResult Create()
         {
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
+            ViewBag.Courses = _context.Course.Select(c => new { c.Id, c.Name }).ToList();
             return View();
         }
 
@@ -57,15 +58,29 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,SubjectId")] Teacher teacher)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,SubjectId")] Teacher teacher, int[] SelectedCourses)
         {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                System.Console.WriteLine(error.ErrorMessage);
+            }
             if (ModelState.IsValid)
             {
+                foreach (var courseId in SelectedCourses)
+                {
+                    var course = await _context.Course.FindAsync(courseId);
+                    if (course != null)
+                    {
+                        teacher.Courses.Add(course);
+                    }
+                }
                 _context.Add(teacher);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", teacher.SubjectId);
+            ViewBag.Courses = _context.Course.Select(c => new { c.Id, c.Name }).ToList();
             return View(teacher);
         }
 
@@ -143,9 +158,15 @@ namespace CS583_App.Controllers
 
         // POST: Teachers/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [Route("Teachers/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var hasCourses = _context.Course.Any(t => t.Teacher.Id == id);
+            if (hasCourses)
+            {
+                return Json(new { success = false, message = "Cannot delete a teacer that is associated with a course." });
+            }
+
             var teacher = await _context.Teacher.FindAsync(id);
             if (teacher != null)
             {
@@ -153,7 +174,7 @@ namespace CS583_App.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true, message = "Teacher deleted successfully." });
         }
 
         private bool TeacherExists(int id)

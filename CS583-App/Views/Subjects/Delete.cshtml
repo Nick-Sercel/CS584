@@ -11,17 +11,73 @@
     <h4>Subject</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <!-- Error message placeholder -->
+    <div id="errorMessage" class="alert alert-danger" style="display:none;"></div>
+
+    <!-- Form -->
+    <form id="deleteForm">
+        <input type="hidden" id="subjectId" value="@Model.Id" />
+        <button type="button" id="deleteButton" class="btn btn-danger">Delete</button> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function () {
+            const subjectId = document.getElementById("subjectId").value;
+            
+            fetch(`/Subjects/Delete/${subjectId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: null
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    // Display error message in the alert div
+                    const errorMessage = document.getElementById("errorMessage");
+                    errorMessage.style.display = "block";
+                    errorMessage.textContent = data.message;
+
+                    // Alternatively, use SweetAlert for a modal-based error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                    });
+                } else {
+                    // Redirect or refresh the page
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: data.message,
+                    }).then(() => {
+                        window.location.href = "/Subjects";
+                    });
+                }
+            })
+            .catch((e) => {
+                Console.WriteLine(e);
+
+                // Handle unexpected errors
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Unexpected Error',
+                    text: 'An unexpected error occurred while deleting the subject.',
+                });
+            });
+        });
+    </script>
+}

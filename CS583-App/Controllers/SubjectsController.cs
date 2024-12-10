@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS583_App.Data;
 using CS583_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS583_App.Controllers
 {
@@ -44,6 +45,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Subjects/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -136,9 +138,15 @@ namespace CS583_App.Controllers
 
         // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [Route("Subjects/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var hasTeachers = _context.Teacher.Any(t => t.SubjectId == id);
+            if (hasTeachers)
+            {
+                return Json(new { success = false, message = "Cannot delete a subject that is associated with teachers." });
+            }
+
             var subject = await _context.Subject.FindAsync(id);
             if (subject != null)
             {
@@ -146,7 +154,7 @@ namespace CS583_App.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true, message = "Subject deleted successfully." });
         }
 
         private bool SubjectExists(int id)

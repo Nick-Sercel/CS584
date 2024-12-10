@@ -59,6 +59,10 @@ namespace CS583_App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Email,SubjectId")] Student student)
         {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                System.Console.WriteLine(error.ErrorMessage);
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(student);
