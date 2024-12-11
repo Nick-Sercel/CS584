@@ -27,7 +27,7 @@ namespace CS583_App.Data
                 .HasForeignKey(s => s.SubjectId)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete on Subject
 
-            // Teacher - Subject (Specialization or Department)
+            // Teacher - Subject (Field)
             modelBuilder.Entity<Teacher>()
                 .HasOne(t => t.Field)
                 .WithMany() // Subject has no navigation property to Teachers
@@ -42,9 +42,10 @@ namespace CS583_App.Data
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete on Subject
 
             // Configure many-to-many relationship between Student and Course
-            modelBuilder.Entity<Student>()
-                .HasMany(s => s.Courses)
-                .WithMany(c => c.Students);
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Students)
+                .WithMany(s => s.Courses)
+                .UsingEntity(j => j.ToTable("CourseStudents")); // Join table for Student-Course
 
             // Configure one-to-many relationship between Teacher and Course
             modelBuilder.Entity<Course>()

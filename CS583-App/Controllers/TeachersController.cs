@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS583_App.Data;
 using CS583_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS583_App.Controllers
 {
@@ -36,6 +37,7 @@ namespace CS583_App.Controllers
 
             var teacher = await _context.Teacher
                 .Include(t => t.Field)
+                .Include(c => c.Courses)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teacher == null)
             {
@@ -46,6 +48,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Teachers/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
@@ -58,7 +61,8 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,SubjectId")] Teacher teacher, int[] SelectedCourses)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,SubjectId")] Teacher teacher, List<int> SelectedCourseIds)
         {
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {
@@ -66,14 +70,13 @@ namespace CS583_App.Controllers
             }
             if (ModelState.IsValid)
             {
-                foreach (var courseId in SelectedCourses)
-                {
-                    var course = await _context.Course.FindAsync(courseId);
-                    if (course != null)
-                    {
-                        teacher.Courses.Add(course);
-                    }
-                }
+                // Fetch the courses from the database based on the selected course IDs
+                var selectedCourses = await _context.Course
+                    .Where(s => SelectedCourseIds.Contains(s.Id))
+                    .ToListAsync();
+
+                // Assign selected courses to the teacher
+                teacher.Courses = selectedCourses;
                 _context.Add(teacher);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,6 +88,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Teachers/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +102,7 @@ namespace CS583_App.Controllers
                 return NotFound();
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", teacher.SubjectId);
+            ViewBag.Courses = _context.Course.Select(c => new { c.Id, c.Name }).ToList();
             return View(teacher);
         }
 
@@ -106,7 +111,8 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,SubjectId")] Teacher teacher)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,SubjectId")] Teacher teacher, List<int> SelectedCourseIds)
         {
             if (id != teacher.Id)
             {
@@ -118,6 +124,20 @@ namespace CS583_App.Controllers
                 try
                 {
                     _context.Update(teacher);
+                    var existingTeacher = await _context.Teacher
+                        .Include(c => c.Courses) // Ensure Courses are loaded
+                        .FirstOrDefaultAsync(c => c.Id == id);
+
+                    if (existingTeacher != null)
+                    {
+
+                        // Fetch the students from the database based on the selected student IDs
+                        var selectedCourses = await _context.Course
+                            .Where(s => SelectedCourseIds.Contains(s.Id))
+                            .ToListAsync();
+
+                        existingTeacher.Courses = selectedCourses;
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -138,6 +158,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Teachers/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -159,6 +180,7 @@ namespace CS583_App.Controllers
         // POST: Teachers/Delete/5
         [HttpPost, ActionName("Delete")]
         [Route("Teachers/Delete/{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hasCourses = _context.Course.Any(t => t.Teacher.Id == id);

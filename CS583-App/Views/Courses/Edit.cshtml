@@ -38,7 +38,7 @@
                 @foreach (var student in ViewBag.Students)
                 {
                     <div>
-                        <input type="checkbox" name="SelectedStudents" value="@student.Id" />
+                        <input type="checkbox" name="SelectedStudentIds" value="@student.Id" />
                         <label>@student.Name</label>
                     </div>
                 }

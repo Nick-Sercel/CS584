@@ -28,6 +28,19 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Major.Name)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Courses)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Courses != null && Model.Courses.Any())
+            {
+                @Html.Raw(string.Join(", ", Model.Courses.Select(course => course.Name)))
+            }
+            else
+            {
+                <span>No courses available</span>
+            }
+        </dd>
     </dl>
 </div>
 <div>

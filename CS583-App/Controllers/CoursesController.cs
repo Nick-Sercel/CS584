@@ -9,6 +9,7 @@ using CS583_App.Data;
 using CS583_App.Models;
 using NuGet.DependencyResolver;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS583_App.Controllers
 {
@@ -39,6 +40,7 @@ namespace CS583_App.Controllers
             var course = await _context.Course
                 .Include(c => c.Subject)
                 .Include(c => c.Teacher)
+                .Include(c => c.Students)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (course == null)
             {
@@ -49,6 +51,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
@@ -62,7 +65,8 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, int[] SelectedStudents)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, List<int> SelectedStudentIds)
         {
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {
@@ -70,24 +74,25 @@ namespace CS583_App.Controllers
             }
             if (ModelState.IsValid)
             {
-                foreach (var studentId in SelectedStudents)
-                {
-                    var student = await _context.Student.FindAsync(studentId);
-                    if (student != null)
-                    {
-                        course.Students.Add(student);
-                    }
-                }
+                // Fetch the students from the database based on the selected student IDs
+                var selectedStudents = await _context.Student
+                    .Where(s => SelectedStudentIds.Contains(s.Id))
+                    .ToListAsync();
+
+                // Assign selected students to the course
+                course.Students = selectedStudents;
                 _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
-            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", course.TeacherId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name", course.TeacherId);
+            ViewBag.Students = await _context.Student.ToListAsync();
             return View(course);
         }
 
         // GET: Courses/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -111,12 +116,17 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, int[] SelectedStudents)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, List<int> SelectedStudentIds)
         {
             if (id != course.Id)
             {
                 return NotFound();
             }
+
+            System.Console.WriteLine("Student IDs");
+            System.Console.WriteLine(SelectedStudentIds.Count);
+            System.Console.WriteLine("End Student IDs");
 
             if (ModelState.IsValid)
             {
@@ -129,19 +139,13 @@ namespace CS583_App.Controllers
 
                     if (existingCourse != null)
                     {
-                        // Clear existing relationships
-                        existingCourse.Students.Clear();
 
-                        // Add the selected students to the course
-                        foreach (var studentId in SelectedStudents)
-                        {
-                            System.Console.WriteLine(studentId);
-                            var student = await _context.Student.FindAsync(studentId);
-                            if (student != null)
-                            {
-                                existingCourse.Students.Add(student);
-                            }
-                        }
+                        // Fetch the students from the database based on the selected student IDs
+                        var selectedStudents = await _context.Student
+                            .Where(s => SelectedStudentIds.Contains(s.Id))
+                            .ToListAsync();
+
+                        existingCourse.Students = selectedStudents;
                     }
                     await _context.SaveChangesAsync();
                 }
@@ -159,11 +163,12 @@ namespace CS583_App.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
-            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", course.TeacherId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name", course.TeacherId);
             return View(course);
         }
 
         // GET: Courses/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -186,6 +191,7 @@ namespace CS583_App.Controllers
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var course = await _context.Course.FindAsync(id);

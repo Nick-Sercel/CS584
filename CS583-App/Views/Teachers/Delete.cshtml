@@ -48,7 +48,7 @@
         document.getElementById("deleteButton").addEventListener("click", function () {
             const teacherId = document.getElementById("teacherId").value;
 
-            fetch(`/Subjects/Delete/${teacherId}`, {
+            fetch(`/Teachers/Delete/${teacherId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

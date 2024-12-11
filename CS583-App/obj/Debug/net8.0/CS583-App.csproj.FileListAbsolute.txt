@@ -270,4 +270,5 @@ D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\CS583-App.sourcelin
 D:\VisualStudioProjects\CS583-App\CS583-App\bin\Debug\net8.0\CS583-App.staticwebassets.endpoints.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets\msbuild.CS583-App.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\VisualStudioProjects\CS583-App\CS583-App\bin\Debug\net8.0\appsettings.Production.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

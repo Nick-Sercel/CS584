@@ -56,6 +56,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name")] Subject subject)
         {
             if (ModelState.IsValid)
@@ -68,6 +69,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Subjects/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +90,7 @@ namespace CS583_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Subject subject)
         {
             if (id != subject.Id)
@@ -119,6 +122,7 @@ namespace CS583_App.Controllers
         }
 
         // GET: Subjects/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +143,7 @@ namespace CS583_App.Controllers
         // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [Route("Subjects/Delete/{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hasTeachers = _context.Teacher.Any(t => t.SubjectId == id);

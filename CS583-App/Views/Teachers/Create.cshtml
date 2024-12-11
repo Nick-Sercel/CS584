@@ -32,7 +32,7 @@
                 @foreach (var course in ViewBag.Courses)
                 {
                     <div>
-                        <input type="checkbox" name="SelectedCourses" value="@course.Id" />
+                        <input type="checkbox" name="SelectedCourseIds" value="@course.Id" />
                         <label>@course.Name</label>
                     </div>
                 }
