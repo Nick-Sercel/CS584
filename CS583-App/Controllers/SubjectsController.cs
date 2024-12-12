@@ -21,12 +21,16 @@ namespace CS583_App.Controllers
         }
 
         // GET: Subjects
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("Subjects/Index")]
+        public IActionResult Index()
         {
-            return View(await _context.Subject.ToListAsync());
+            return Json(_context.Subject);
         }
 
         // GET: Subjects/Details/5
+        [HttpGet]
+        [Route("Subjects/Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,35 +45,24 @@ namespace CS583_App.Controllers
                 return NotFound();
             }
 
-            return View(subject);
-        }
-
-        // GET: Subjects/Create
-        [Authorize]
-        public IActionResult Create()
-        {
-            return View();
+            return Json(new { success = true, data = subject });
         }
 
         // POST: Subjects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name")] Subject subject)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(subject);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            return View(subject);
+            return Json(subject);
         }
 
         // GET: Subjects/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,15 +75,11 @@ namespace CS583_App.Controllers
             {
                 return NotFound();
             }
-            return View(subject);
+            return Json(subject);
         }
 
         // POST: Subjects/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Subject subject)
         {
             if (id != subject.Id)
@@ -113,12 +102,12 @@ namespace CS583_App.Controllers
                     }
                     else
                     {
-                        throw;
+                        return Json(new { success = false});
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true, data=subject });
             }
-            return View(subject);
+            return Json(new { success = true, data = subject });
         }
 
         // GET: Subjects/Delete/5
@@ -137,19 +126,20 @@ namespace CS583_App.Controllers
                 return NotFound();
             }
 
-            return View(subject);
+            return Json(subject);
         }
 
         // POST: Subjects/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [Route("Subjects/Delete/{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hasTeachers = _context.Teacher.Any(t => t.SubjectId == id);
-            if (hasTeachers)
+            var hasStudents = _context.Student.Any(t => t.SubjectId == id);
+            var hasCourses = _context.Course.Any(c => c.SubjectId == id);
+            if (hasTeachers || hasStudents || hasCourses)
             {
-                return Json(new { success = false, message = "Cannot delete a subject that is associated with teachers." });
+                return Json(new { success = false, message = "Cannot delete a subject that is associated with something." });
             }
 
             var subject = await _context.Subject.FindAsync(id);

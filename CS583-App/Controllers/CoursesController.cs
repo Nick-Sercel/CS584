@@ -23,10 +23,12 @@ namespace CS583_App.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        [Route("Courses/Index")]
+        public IActionResult Index()
         {
             var applicationDbContext = _context.Course.Include(c => c.Subject).Include(c => c.Teacher);
-            return View(await applicationDbContext.ToListAsync());
+            return Json(applicationDbContext);
         }
 
         // GET: Courses/Details/5
