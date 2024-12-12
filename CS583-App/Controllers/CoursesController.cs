@@ -10,6 +10,7 @@ using CS583_App.Models;
 using NuGet.DependencyResolver;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 namespace CS583_App.Controllers
 {
@@ -32,6 +33,8 @@ namespace CS583_App.Controllers
         }
 
         // GET: Courses/Details/5
+        [HttpGet]
+        [Route("Courses/Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,27 +52,34 @@ namespace CS583_App.Controllers
                 return NotFound();
             }
 
-            return View(course);
-        }
-
-        // GET: Courses/Create
-        [Authorize]
-        public IActionResult Create()
-        {
-            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name");
-            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name");
-            ViewBag.Students = _context.Student.Select(c => new { c.Id, c.Name }).ToList();
-            return View();
+            return Json(course);
         }
 
         // POST: Courses/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, List<int> SelectedStudentIds)
+        [Route("Courses/Create")]
+        public async Task<IActionResult> Create()
         {
+            using var reader = new StreamReader(Request.Body);
+            var body = await reader.ReadToEndAsync();
+
+            // Parse the JSON manually
+            var data = JsonSerializer.Deserialize<JsonElement>(body);
+
+            // Extract fields from the JSON
+            var course = new Course
+            {
+                Id = 0,
+                Name = data.GetProperty("Name").GetString(),
+                Description = data.GetProperty("Description").GetString(),
+                TeacherId = data.GetProperty("TeacherId").GetInt32(),
+                SubjectId = data.GetProperty("SubjectId").GetInt32()
+            };
+
+            var SelectedStudentIds = data.GetProperty("SelectedStudentIds").EnumerateArray()
+                                        .Select(c => c.GetInt32())
+                                        .ToList();
+
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {
                 System.Console.WriteLine(error.ErrorMessage);
@@ -85,50 +95,44 @@ namespace CS583_App.Controllers
                 course.Students = selectedStudents;
                 _context.Add(course);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
             ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name", course.TeacherId);
             ViewBag.Students = await _context.Student.ToListAsync();
-            return View(course);
-        }
-
-        // GET: Courses/Edit/5
-        [Authorize]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Course.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-            ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
-            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name", course.TeacherId);
-            ViewBag.Students = _context.Student.Select(c => new { c.Id, c.Name }).ToList();
-            return View(course);
+            return Json(new { success = false, message = "Failed to create course" });
         }
 
         // POST: Courses/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TeacherId,SubjectId")] Course course, List<int> SelectedStudentIds)
+        [Route("Courses/Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
+            
+            using var reader = new StreamReader(Request.Body);
+            var body = await reader.ReadToEndAsync();
+
+            // Parse the JSON manually
+            var data = JsonSerializer.Deserialize<JsonElement>(body);
+
+            // Extract fields from the JSON
+            var course = new Course
+            {
+                Id = data.GetProperty("Id").GetInt32(),
+                Name = data.GetProperty("Name").GetString(),
+                Description = data.GetProperty("Description").GetString(),
+                TeacherId = data.GetProperty("TeacherId").GetInt32(),
+                SubjectId = data.GetProperty("SubjectId").GetInt32()
+            };
+
+            var SelectedStudentIds = data.GetProperty("SelectedStudentIds").EnumerateArray()
+                                        .Select(c => c.GetInt32())
+                                        .ToList();
+
             if (id != course.Id)
             {
                 return NotFound();
             }
-
-            System.Console.WriteLine("Student IDs");
-            System.Console.WriteLine(SelectedStudentIds.Count);
-            System.Console.WriteLine("End Student IDs");
 
             if (ModelState.IsValid)
             {
@@ -162,38 +166,16 @@ namespace CS583_App.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "Id", "Name", course.SubjectId);
             ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Name", course.TeacherId);
-            return View(course);
-        }
-
-        // GET: Courses/Delete/5
-        [Authorize]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Course
-                .Include(c => c.Subject)
-                .Include(c => c.Teacher)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
+            return Json(new { success = false, message = "Failed to edit course" });
         }
 
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize]
+        [Route("Courses/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var course = await _context.Course.FindAsync(id);
@@ -203,7 +185,7 @@ namespace CS583_App.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true, message = "Course deleted successfully." });
         }
 
         private bool CourseExists(int id)

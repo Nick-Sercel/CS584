@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CS583_App.Data;
 using CS583_App.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 namespace CS583_App.Controllers
 {
@@ -45,46 +46,62 @@ namespace CS583_App.Controllers
                 return NotFound();
             }
 
-            return Json(new { success = true, data = subject });
+            return Json(subject);
         }
 
         // POST: Subjects/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Subject subject)
+        [Route("Subjects/Create")]
+        public async Task<IActionResult> Create()
         {
+            using var reader = new StreamReader(Request.Body);
+            var body = await reader.ReadToEndAsync();
+
+            // Parse the JSON manually
+            var data = JsonSerializer.Deserialize<JsonElement>(body);
+
+            // Extract fields from the JSON
+            var subject = new Subject
+            {
+                Id = 0,
+                Name = data.GetProperty("Name").GetString(),
+            };
+
             if (ModelState.IsValid)
             {
                 _context.Add(subject);
                 await _context.SaveChangesAsync();
+                return Json(new { success = true });
             }
-            return Json(subject);
-        }
-
-        // GET: Subjects/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var subject = await _context.Subject.FindAsync(id);
-            if (subject == null)
-            {
-                return NotFound();
-            }
-            return Json(subject);
+            return Json(new { success = false, message = "Failed to create subject" });
         }
 
         // POST: Subjects/Edit/5
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Subject subject)
+        [Route("Subjects/Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
+            using var reader = new StreamReader(Request.Body);
+            var body = await reader.ReadToEndAsync();
+
+            // Parse the JSON manually
+            var data = JsonSerializer.Deserialize<JsonElement>(body);
+
+            // Extract fields from the JSON
+            var subject = new Subject
+            {
+                Id = data.GetProperty("Id").GetInt32(),
+                Name = data.GetProperty("Name").GetString(),
+            };
+
             if (id != subject.Id)
             {
                 return NotFound();
+            }
+
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                System.Console.WriteLine(error.ErrorMessage);
             }
 
             if (ModelState.IsValid)
@@ -105,32 +122,13 @@ namespace CS583_App.Controllers
                         return Json(new { success = false});
                     }
                 }
-                return Json(new { success = true, data=subject });
+                return Json(new { success = true });
             }
-            return Json(new { success = true, data = subject });
-        }
-
-        // GET: Subjects/Delete/5
-        [Authorize]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var subject = await _context.Subject
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (subject == null)
-            {
-                return NotFound();
-            }
-
-            return Json(subject);
+            return Json(new { success = false, message = "Failed to edit subject" });
         }
 
         // POST: Subjects/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [Route("Subjects/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

@@ -16,6 +16,8 @@ namespace CS583_App.Data
         public DbSet<Teacher> Teacher { get; set; } = default!;
         public DbSet<Subject> Subject { get; set; } = default!;
 
+        public DbSet<Account> Account { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
