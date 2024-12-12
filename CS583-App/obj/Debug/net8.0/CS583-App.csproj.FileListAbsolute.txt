@@ -135,9 +135,7 @@ D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets\msb
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.CS583-App.props
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.CS583-App.props
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\staticwebassets.pack.json
-D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\scopedcss\bundle\CS583-App.styles.css
-D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\scopedcss\projectbundle\CS583-App.bundle.scp.css
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\CS583-App.csproj.Up2Date
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\CS583-App.dll
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Debug\net8.0\refint\CS583-App.dll

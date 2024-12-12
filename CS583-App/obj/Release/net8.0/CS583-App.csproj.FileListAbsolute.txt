@@ -253,9 +253,7 @@ D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\CS583-App.MvcAppl
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\CS583-App.RazorAssemblyInfo.cache
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\CS583-App.RazorAssemblyInfo.cs
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\CS583-App.sourcelink.json
-D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\scopedcss\bundle\CS583-App.styles.css
-D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\scopedcss\projectbundle\CS583-App.bundle.scp.css
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\staticwebassets.build.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\staticwebassets.development.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\staticwebassets.build.endpoints.json

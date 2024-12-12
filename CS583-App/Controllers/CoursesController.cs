@@ -11,6 +11,7 @@ using NuGet.DependencyResolver;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
+using Microsoft.AspNetCore.Cors;
 
 namespace CS583_App.Controllers
 {

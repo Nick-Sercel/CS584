@@ -9,7 +9,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173", "http://localhost:5038", "http://ec2-54-219-93-61.us-west-1.compute.amazonaws.com/") // React dev server
+            policy.WithOrigins("http://localhost:5173", "http://localhost:5038", "http://localhost:7043", "http://ec2-54-219-93-61.us-west-1.compute.amazonaws.com/") // React dev server
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -52,7 +52,10 @@ app.UseRouting();
 
 app.UseCors();
 
-app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapFallbackToFile("index.html"); // This serves index.html for any route not handled by the backend
+});
 
 // Map API controllers only.
 app.MapControllers();

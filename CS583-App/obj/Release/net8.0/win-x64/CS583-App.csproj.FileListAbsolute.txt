@@ -243,9 +243,7 @@ D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\CS583-App
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\CS583-App.RazorAssemblyInfo.cache
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\CS583-App.RazorAssemblyInfo.cs
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\CS583-App.sourcelink.json
-D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\scopedcss\bundle\CS583-App.styles.css
-D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\scopedcss\projectbundle\CS583-App.bundle.scp.css
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\staticwebassets.build.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\staticwebassets.development.json
 D:\VisualStudioProjects\CS583-App\CS583-App\obj\Release\net8.0\win-x64\staticwebassets.build.endpoints.json
